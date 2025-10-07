@@ -4,11 +4,11 @@ canvas.height = 800;
 
 const ctx = canvas.getContext("2d");
 
-ctx.rect(50, 50, 100, 100);
-ctx.rect(150, 150, 100, 100);
-ctx.fill();
+ctx.moveTo(100, 100);
+ctx.lineTo(200, 100);
+ctx.lineTo(200, 200);
+ctx.lineTo(100, 200);
+ctx.lineTo(100, 100);
 
-ctx.beginPath();
-ctx.rect(350, 350, 100, 100);
 ctx.fillStyle = "red";
 ctx.fill();
