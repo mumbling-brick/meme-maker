@@ -11,6 +11,11 @@ function LineWidthSelection(event) {
     ctx.lineWidth = event.target.value;
 }
 
+const Color = document.getElementById("color");
+function ColorSelection(event) {
+    ctx.strokeStyle = event.target.value;
+    ctx.fillStyle = event.target.value;
+}
 
 function drawLining(event) {
     if(isPainting) {
@@ -37,3 +42,4 @@ canvas.addEventListener("mouseleave", endLining);
 
 
 lineWidth.addEventListener("change", LineWidthSelection);
+Color.addEventListener("change", ColorSelection);
