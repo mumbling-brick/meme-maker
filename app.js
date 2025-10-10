@@ -1,6 +1,8 @@
 const canvas = document.querySelector("canvas");
 canvas.width = 800;
 canvas.height = 800;
+const CANVAS_WIDTH = 800;
+const CANVAS_HEIGHT = 800;
 
 const ctx = canvas.getContext("2d");
 ctx.lineWidth = 5;
@@ -55,10 +57,22 @@ function onModeClick() {
 }
 function onCanvasClick() {
     if(isFilling) {
-        ctx.fillRect(0, 0, 800, 800);
+        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
 }
 
+const resetBtn = document.getElementById("reset-btn");
+function onResetBtnClick() {
+    ctx.fillStyle = "#808080";
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
+const eraseBtn = document.getElementById("erase-btn");
+function onEraseBtnClick() {
+    ctx.strokeStyle = "#808080";
+    isFilling = false;
+    modeBtn.innerText = "Fill";
+}
 
 canvas.addEventListener("mousemove", drawLining);
 canvas.addEventListener("mousedown", startLining);
@@ -71,3 +85,5 @@ lineWidth.addEventListener("change", LineWidthSelection);
 Color.addEventListener("change", ColorSelection);
 ColorOptions.forEach(color => color.addEventListener("click", onColorCLick));
 modeBtn.addEventListener("click", onModeClick);
+resetBtn.addEventListener("click", onResetBtnClick);
+eraseBtn.addEventListener("click", onEraseBtnClick);
