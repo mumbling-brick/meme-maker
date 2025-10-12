@@ -6,6 +6,7 @@ const CANVAS_HEIGHT = 800;
 
 const ctx = canvas.getContext("2d");
 ctx.lineWidth = 5;
+ctx.lineCap = "round";
 let isPainting = false;
 let isFilling = false;
 
@@ -74,6 +75,15 @@ function onEraseBtnClick() {
     modeBtn.innerText = "Fill";
 }
 
+const saveBtn = document.getElementById("save");
+function onSaveBtnClick() {
+    const url = canvas.toDataURL();
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "myDrawing.png";
+    a.click();
+}
+
 
 const fileInput = document.getElementById("file");
 function onFileChange(event) {
@@ -87,7 +97,22 @@ function onFileChange(event) {
     };
 }
 
+const textInput = document.getElementById("text");
+function onDoubleClick(event) {
+    const text = textInput.value;
+    if(text !== "") {
+        ctx.save();
+        ctx.lineWidth = 1;
+        ctx.font = "68px serif";
+        ctx.fillText(text, event.offsetX, event.offsetY);
+        ctx.restore();
+    } else {
+        return
+    }
+}
 
+
+canvas.addEventListener("dblclick", onDoubleClick);
 canvas.addEventListener("mousemove", drawLining);
 canvas.addEventListener("mousedown", startLining);
 canvas.addEventListener("mouseup", endLining);
@@ -101,5 +126,6 @@ ColorOptions.forEach(color => color.addEventListener("click", onColorCLick));
 modeBtn.addEventListener("click", onModeClick);
 resetBtn.addEventListener("click", onResetBtnClick);
 eraseBtn.addEventListener("click", onEraseBtnClick);
+saveBtn.addEventListener("click", onSaveBtnClick);
 
 fileInput.addEventListener("change", onFileChange);
